@@ -1,9 +1,9 @@
-const URL = "https://pokeapi.co/api/v2/pokemon"
+const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 class Http{
     static instance = new Http()
 
-    get_animes = async() =>{
+    get_pokemons = async() =>{
         try{
             const request = await fetch (`${URL}?limit=100`)
             const response = await request.json()
@@ -13,9 +13,9 @@ class Http{
             throw new Error(err);
         }
     }
-    get_anime = async(id) => {
+    get_pokemon = async(id) => {
         try{
-            const request = await fetch (`${URL}${id}`)
+            const request = await fetch (`${URL}${id}/`)
             const response = await request.json()
             return response
 

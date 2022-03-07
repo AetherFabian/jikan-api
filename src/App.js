@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import {Link } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [animeList, SetAnimeList] = useState([]);
+
+	const GetTopAnime = async () => {
+		const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/favorite`)
+			.then(res => res.json());
+
+		SetAnimeList(temp.top.slice(0, 15));
+	}
+
+	
+
+	useEffect(() => {
+		GetTopAnime();
+	}, []);
+	
+	return (
+		<div className="App">
+			<Header />
+			<div className="content-wrap">
+
+				<MainContent
+					animeList={animeList} />
+
+				
+			</div>
+		</div>
+	);
 }
 
 export default App;

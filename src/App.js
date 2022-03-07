@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
-import {Link } from 'react-router-dom';
 
 function App() {
 	const [animeList, SetAnimeList] = useState([]);
@@ -13,12 +12,10 @@ function App() {
 		SetAnimeList(temp.top.slice(0, 15));
 	}
 
-	
-
 	useEffect(() => {
 		GetTopAnime();
 	}, []);
-	
+
 	return (
 		<div className="App">
 			<Header />
@@ -27,7 +24,6 @@ function App() {
 				<MainContent
 					animeList={animeList} />
 
-				
 			</div>
 		</div>
 	);
